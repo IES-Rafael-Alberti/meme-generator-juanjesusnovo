@@ -11,7 +11,7 @@ if(isset($_POST["user"])){
         ":psw" => $psw
     );
 
-    $sql = "SELECT * FROM usuarios WHERE nombre = :user AND contrasena = :psw";
+    $sql = "INSERT INTO usuarios (nombre, contrasena) VALUES (:user, :psw)";
     $stmt = $conn->prepare($sql);
     $stmt -> execute($loginUsuario);
     if($stmt -> rowCount() == 1){
@@ -40,8 +40,6 @@ if(isset($_POST["user"])){
     <input type="text" name="user" id="user">
     <label for="psw">Contraseña: </label>
     <input type="password" name="psw" id="psw">
-    <label for="foto">Foto</label>
-    <input type="file" name="foto" id="foto" multiple>
     <input type="submit" value="Enviar">
 </form>
 </body>

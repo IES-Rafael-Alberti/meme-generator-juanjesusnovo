@@ -17,12 +17,12 @@ $result = curl_exec($ch);
 //decode content (assoc array)
 $data = json_decode($result, true);
 
+
 //if success shows images
 if($data["success"]) {
     //iterates over memes array
     foreach($data["data"]["memes"] as $meme) {
         //show meme image
-        echo "<img width='50px' src='" . $meme["url"] . "'>";
-
+        echo "<a href='editameme.php?id=".$meme["id"]."&box=".$meme["box_count"]."&url=".$meme["url"]."'><img width='100px' src='" . $meme["url"] . "'></a>";
     }
 }
