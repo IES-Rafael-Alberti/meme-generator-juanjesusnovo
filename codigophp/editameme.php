@@ -2,7 +2,10 @@
 $image = $_GET["url"];
 $boxes = $_GET["box"];
 $id=$_GET["id"];
-
+if(isset($_POST["text0"])){
+    header("Location: memeeditado.php");
+    exit(0);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,13 +16,15 @@ $id=$_GET["id"];
     <title>Imagen modificada</title>
 </head>
 <body>
-    <form action="" method="post">
+    <form action="memeeditado.php" method="post">
+        <input name="id" type="hidden" value=<?php echo $id ?>>
+        <input name="boxes" type=hidden value=<?php echo $boxes ?>>
         <?php
             $x = 1;
             echo "<img src='$image' width='300px'>";
             while($x <= $boxes){
                 echo "<label for='text$x'>Texto $x</label>";
-                echo "<input type='text' name='text' id='text'>";
+                echo "<input type='text' name='text$x' id='text$x'>";
                 $x++;
             }
             echo "<input type='submit' value='Enviar'>";

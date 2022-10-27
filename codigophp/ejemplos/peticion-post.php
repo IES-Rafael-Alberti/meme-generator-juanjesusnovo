@@ -39,5 +39,5 @@ $data = json_decode($result, true);
 
 //if success show image
 if($data["success"]) {
-    echo "<img src='" . $data["data"]["url"] . "'>";
+    echo "<img src='".$data["data"]["url"]."'>";
 }

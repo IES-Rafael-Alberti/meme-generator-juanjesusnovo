@@ -15,7 +15,8 @@ if(isset($_POST["user"])){
     $stmt -> execute($loginUsuario);
     if($stmt -> rowCount() == 1){
         session_start();
-        $_SESSION["login"] = $user;
+        $_SESSION["usuario"] = $user;
+        $_SESSION["contrasena"]= $psw;
         session_write_close();
         header("Location: index.php");
         exit(0);
