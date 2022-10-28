@@ -4,14 +4,16 @@ if(isset($_POST["user"])){
 
     $user = $_POST["user"];
     $psw = $_POST["psw"];
-
+    $foto=$_FILES["foto"]["name"];
+    file_put_contents("fotos/$foto",file_get_contents($_FILES["foto"]["tmp_name"]));
 
     $loginUsuario = array(
         ":user" => $user,
-        ":psw" => $psw
+        ":psw" => $psw,
+        ":foto" => $foto
     );
 
-    $sql = "INSERT INTO usuarios (nombre, contrasena) VALUES (:user, :psw)";
+    $sql = "INSERT INTO usuarios (nombre, contrasena, foto) VALUES (:user, :psw, :foto)";
     $stmt = $conn->prepare($sql);
     $stmt -> execute($loginUsuario);
     if($stmt -> rowCount() == 1){
@@ -40,6 +42,8 @@ if(isset($_POST["user"])){
     <input type="text" name="user" id="user">
     <label for="psw">Contraseña: </label>
     <input type="password" name="psw" id="psw">
+    <label for="foto">Foto</label>
+    <input type="file" name="foto" id="foto">
     <input type="submit" value="Enviar">
 </form>
 </body>

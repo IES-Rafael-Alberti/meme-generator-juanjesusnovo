@@ -1,3 +1,13 @@
+<?php
+    require ("conecta.php");
+    require ("revisarlogin.php");
+
+    $usuario = $_SESSION["usuario"];
+    $imgUser = $conn-> prepare("SELECT foto FROM usuarios WHERE nombre= :nombre");
+    $imgUser->execute(array(":nombre"=>$usuario));
+    $imagen = $imgUser->fetchAll(PDO::FETCH_ASSOC);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +17,15 @@
     <title>Página principal</title>
 </head>
 <body>
-    <a href="phpinfo.php">phpinfo()</a>
-    <a href="xdebug_info.php">xdebug_info()</a>
-    <a href="lista_memes.php">Crea tu Meme</a>
+    <header>
+        <?php
+        print("<p>hola $usuario, bienvenido</p>");
+        ?>
+        <a href="logout.php">Desconectarse</a>
+    </header>
+    <main>
+        <a href="lista_memes.php">Crea tu Meme</a>
+        <a href="memesusuario.php">Mis Memes</a>
+    </main>
 </body>
 </html>

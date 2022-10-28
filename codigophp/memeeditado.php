@@ -49,12 +49,15 @@ $data = json_decode($result, true);
 
 //if success show image
 if($data["success"]) {
+    $meme = $_SESSION["usuario"]."_".date("dmyhis").".jpg";
+    file_put_contents("fotos/$meme", file_get_contents($data["data"]["url"]));
     $urlImagen = $data["data"]["url"];
     echo "<img src='".$data["data"]["url"]."'>";
-    $sql = "INSERT INTO memes (idUsuario, url) VALUES (:idUsuario, :url)";
+    $sql = "INSERT INTO memes (idUsuario, url, idMeme) VALUES (:idUsuario, :nombre, :idMeme)";
     $datos = array(
         ":idUsuario" => $_SESSION["usuario"],
-        ":url" => $urlImagen
+        ":nombre" => $meme,
+        ":idMeme" => $id
     );
     $stmt = $conn->prepare($sql);
     if($stmt -> execute($datos) != 1){
@@ -62,3 +65,17 @@ if($data["success"]) {
         exit(0);
     }
 }
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Imagen modificada</title>
+</head>
+<body>
+    <a href="index.php">Ir al inicio</a>
+</body>
+</html>
+

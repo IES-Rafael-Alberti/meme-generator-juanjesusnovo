@@ -6,6 +6,7 @@ if(isset($_POST["text0"])){
     header("Location: memeeditado.php");
     exit(0);
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

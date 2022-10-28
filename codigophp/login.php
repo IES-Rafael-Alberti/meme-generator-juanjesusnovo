@@ -35,6 +35,9 @@ if(isset($_POST["user"])){
     <title>Document</title>
 </head>
 <body>
+<header>
+    <img src="">
+</header>
 <form action="" method="post" enctype="multipart/form-data">
     <label for="user">Nombre: </label>
     <input type="text" name="user" id="user">
